@@ -28,5 +28,6 @@ public class Main{
 		//2. 조합 (중복 X) 재귀
 		C=0;
 		comb(0, 0);
+        br.close();
 	}
 }

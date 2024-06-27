@@ -16,16 +16,16 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		int N = Integer.parseInt(br.readLine()); //도시개수
-		int[] len = new int[N-1]; //길이배열
-		int[] price = new int[N]; // 가격배열
+		long[] len = new long[N-1]; //길이배열
+		long[] price = new long[N]; // 가격배열
 		st = new StringTokenizer(br.readLine()," ");
-		for(int l=0; l<N-1; l++) len[l] = Integer.parseInt(st.nextToken());
+		for(int l=0; l<N-1; l++) len[l] = Long.parseLong(st.nextToken());
 		st = new StringTokenizer(br.readLine()," ");
-		for(int p=0; p<N; p++) price[p] = Integer.parseInt(st.nextToken());
+		for(int p=0; p<N; p++) price[p] = Long.parseLong(st.nextToken());
 		
 		// 2. 처리
-		int total = len[0]*price[0]; //가격총합 초기화
-		int min = price[0]; //최소가격 초기화
+		long total = len[0]*price[0]; //가격총합 초기화
+		long min = price[0]; //최소가격 초기화
 		for(int i=1; i<N-1; i++) {
 			min = Math.min(price[i], min); //갱신
 			total += (min*len[i]);

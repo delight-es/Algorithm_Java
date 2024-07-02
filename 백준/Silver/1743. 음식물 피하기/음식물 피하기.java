@@ -51,7 +51,7 @@ public class Main {
 				if(!v[i][j] && arr[i][j]==1) {
 					dfs(i,j);
 					ans = Math.max(cnt, ans);
-                    v = new boolean[N+1][M+1]; //1-base
+                    //v = new boolean[N+1][M+1]; //1-base
 					cnt=0;
 				}
 			}

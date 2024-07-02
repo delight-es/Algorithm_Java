@@ -2,8 +2,12 @@ import java.io.*;
 import java.util.*;
 
 /* 줄세우기
- * 
+ * N: 정점수(학생수), M: 간선수(키 비교횟수)
+ * g: 그래프(학생번호순서), indegree: 진입차수
+ * 학생들을 줄 세운 결과 --> 출력!
+ * (분석) 위상정렬: 순서 있게 정렬해야함
  */
+
 public class Main {
 	static List<Integer>[] g;
 	static int N,M; //정점수, 간선수

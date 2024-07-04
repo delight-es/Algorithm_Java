@@ -30,11 +30,9 @@ public class Main {
 		// (1) 준비
 		boolean[] v = new boolean[V];
 		int[] d = new int[V]; //최소거리 기록배열
-		String[] ans = new String[V];
 		for(int i=0; i<V; i++) d[i]=Integer.MAX_VALUE;
 		
 		// (2) 다익스트라
-		int cnt=0;
 		d[K]=0; //시작정점=K
 		for(int i=0; i<V; i++) {
 			int min = Integer.MAX_VALUE;
@@ -49,19 +47,18 @@ public class Main {
 			if(minVertex==-1) continue;
 			
 			// (2-2) 정점들 최단거리 누적 갱신
+            if(v[minVertex]) continue;
 			v[minVertex] = true;
 			for(int[] j:g[minVertex]) {
 				if(!v[j[0]] && d[j[0]]>min+j[1]) {
 							   d[j[0]]=min+j[1];
 				}
 			}
-			// (2-3) 출력
-			if (min != Integer.MAX_VALUE) ans[minVertex] = String.valueOf(min);
 		}
 		//3. 출력
-		for (String a : ans) {
-		    if (a == null) System.out.println("INF");
-		    else System.out.println(a);
+		for(int i=0; i<V; i++) {
+			if(d[i]==Integer.MAX_VALUE) System.out.println("INF");
+			else System.out.println(d[i]);
 		}
 		br.close();
 	}

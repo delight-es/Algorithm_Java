@@ -6,7 +6,7 @@ import java.util.*;
  * K:시작정점번호
  * (u,v,w):정점,정점,가중치
  * i줄에 i번정점으로의 최단경로 --> 출력!
- * (분석) 다익스트라: 최단경로
+ * (분석) 다익스트라+우선순위큐: 최단경로
  */
 
 public class Main {
@@ -32,18 +32,15 @@ public class Main {
 		int[] d = new int[V]; //최소거리 기록배열
 		for(int i=0; i<V; i++) d[i]=Integer.MAX_VALUE;
 		
-		// (2) 다익스트라
+		// (2) 다익스트라 <- 우선순위 큐
+		PriorityQueue<int[]> pq = new PriorityQueue<>((o1,o2)->Integer.compare(o1[1], o2[1]));
 		d[K]=0; //시작정점=K
-		for(int i=0; i<V; i++) {
-			int min = Integer.MAX_VALUE;
-			int minVertex = -1;
+		pq.offer(new int[] {K,0});
+		while(!pq.isEmpty()) {
+			int[] vw = pq.poll();
 			// (2-1) 정점중 최단거리 찾기
-			for(int j=0; j<V; j++) {
-				if(!v[j] && min>d[j]) {
-							min=d[j];
-							minVertex=j;
-				}
-			}
+			int min = vw[1];
+			int minVertex = vw[0];
 			if(minVertex==-1) continue;
 			
 			// (2-2) 정점들 최단거리 누적 갱신
@@ -52,6 +49,7 @@ public class Main {
 			for(int[] j:g[minVertex]) {
 				if(!v[j[0]] && d[j[0]]>min+j[1]) {
 							   d[j[0]]=min+j[1];
+							   pq.offer(new int[] {j[0], min+j[1]});
 				}
 			}
 		}

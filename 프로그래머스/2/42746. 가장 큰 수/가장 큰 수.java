@@ -2,30 +2,22 @@ import java.util.*;
 import java.io.*;
 
 /* 정렬(가장큰수)
- * numbers: 숫자배열
- * answer: 정답배열
- * (분석) 문자배열로 변환 -> 원소 차근차근 앞/뒤에 붙여 비교
- (!) 내림차순 정렬 X 
- 반례: [3, 30, 34, 5, 9] 
- >> (정렬)9534303 < (답)"9534330"
+ * numbers:숫자배열, answer:정답배열
+ -- 숫자배열의 정수를 이어붙여 가장 큰 수 찾기
+ * 출력 ==> 가장 큰 수 (문자열)
+ * [분석] Arrays.sort()에 각 숫자 앞뒤로 붙여 오름차순 정렬 
+ * (방법) StringBuilder로 풀기
  */
 
-public class Solution {
-	
-	static String solution(int[] numbers) {
-		//(1)문자변환
-		String[] s = new String[numbers.length];
-		for(int i=0; i<numbers.length; i++){
-			s[i]=Integer.toString(numbers[i]);
-		}
-        
-		//(2)정렬
-		Arrays.sort(s,(o1,o2) -> (o2+o1).compareTo(o1+o2)); //내림차순(-)
-        if (s[0].equals("0")) return "0"; //모든 숫자 0
-        
-		//(3)출력
-		StringBuilder sb = new StringBuilder();
-		for(String a:s) sb.append(a);
+class Solution {    
+    public String solution(int[] numbers) {
+		int N = numbers.length; //numbers 길이
+        StringBuilder sb = new StringBuilder();
+        String s[] = new String[N]; //문자변환 배열
+        for(int i=0; i<N; i++) s[i]=numbers[i]+"";
+        Arrays.sort(s, (o1,o2)->-(o1+o2).compareTo(o2+o1)); //정렬
+        if(s[0].equals("0")) return "0"; //예외처리 (ex) {0,0} -> 00 (X)
+        for(String ss:s) sb.append(ss);
         return sb.toString();
     }
 }
